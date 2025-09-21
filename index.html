@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Saigon Blossom | ベトナム料理の香り</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root {
+      --jade-green: #2E8B57;
+      --lotus-pink: #E75480;
+      --golden-yellow: #FFD700;
+      --body-bg: #f4f7f5;
+      --text-dark: #1f2b25;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+      background: var(--body-bg);
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+    header {
+      background: var(--jade-green);
+      color: #fff;
+      padding: 1.4rem 1.5rem;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 4px solid rgba(255,215,0,0.45);
+    }
+    header::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 12% 50%, rgba(231,84,128,0.18), transparent 60%);
+      pointer-events: none;
+    }
+    .header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+    header h1 { font-size: 2.2rem; letter-spacing: 0.08em; margin: 0; }
+    header p { font-size: 1rem; margin: 0; opacity: 0.9; }
+    .main-nav {
+      display: flex;
+      gap: 1.2rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .main-nav a {
+      color: var(--golden-yellow);
+      font-weight: 600;
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      font-size: 0.95rem;
+      position: relative;
+    }
+    .main-nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -0.35rem;
+      width: 100%;
+      height: 2px;
+      background: rgba(255,215,0,0.7);
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform 0.2s ease;
+    }
+    .main-nav a:hover::after,
+    .main-nav a:focus-visible::after { transform: scaleX(1); }
+    .hero {
+      position: relative;
+      background: url('images/hero.jpg') center/cover no-repeat;
+      color: #fff;
+      padding: 6rem 1.5rem;
+      overflow: hidden;
+      max-width: 100%;
+      margin: 0;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 680px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .hero-kicker {
+      display: inline-block;
+      letter-spacing: 0.18em;
+      font-size: 1.1rem;
+      color: var(--golden-yellow);
+      margin-bottom: 1.1rem;
+      text-transform: uppercase;
+      font-weight: 600;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 0.55rem 1.3rem;
+      border-radius: 6px;
+      backdrop-filter: blur(2px);
+    }
+    .hero h2 {
+      font-size: 2.6rem;
+      line-height: 1.2;
+      margin-bottom: 1.2rem;
+      color: var(--lotus-pink);
+      text-shadow: 0 6px 32px rgba(0,0,0,0.35);
+      white-space: nowrap;
+    }
+    .hero p {
+      font-size: 1.1rem;
+      margin-bottom: 2.2rem;
+      color: #fef9fb;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.4);
+      display: inline-block;
+      background: rgba(0, 0, 0, 0.45);
+      padding: 1rem 1.6rem;
+      border-radius: 6px;
+      line-height: 1.7;
+      backdrop-filter: blur(2px);
+    }
+    .no-break { white-space: nowrap; }
+    .cta-btn {
+      display: inline-block;
+      background: var(--golden-yellow);
+      color: #524100;
+      font-weight: 700;
+      padding: 0.9rem 2.4rem;
+      border-radius: 999px;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+    }
+    .cta-btn:hover { transform: translateY(-3px); box-shadow: 0 16px 28px rgba(0,0,0,0.18); }
+    section { padding: 4rem 1.5rem; max-width: 1100px; margin: 0 auto; }
+    .intro {
+      display: grid;
+      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      align-items: center;
+    }
+    .intro img {
+      width: 100%;
+      border-radius: 24px;
+      box-shadow: 0 18px 34px rgba(46,139,87,0.18);
+    }
+    .intro h2 { font-size: 2.3rem; color: var(--jade-green); margin-bottom: 1rem; }
+    .intro p { font-size: 1.05rem; }
+    .highlights {
+      background: #fff;
+      border-radius: 32px;
+      box-shadow: 0 18px 48px rgba(46,139,87,0.12);
+      padding: 3rem 2rem;
+    }
+    .highlights h2 {
+      text-align: center;
+      font-size: 2.2rem;
+      color: var(--lotus-pink);
+      margin-bottom: 2rem;
+    }
+    .highlight-grid {
+      display: grid;
+      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+    .highlight-card {
+      background: linear-gradient(160deg, rgba(231,84,128,0.12), rgba(46,139,87,0.1));
+      padding: 1.8rem;
+      border-radius: 24px;
+      transition: transform 0.2s ease;
+    }
+    .highlight-card:hover { transform: translateY(-6px); }
+    .highlight-card h3 { margin-bottom: 0.8rem; color: var(--jade-green); font-size: 1.3rem; }
+    .menu {
+      display: grid;
+      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+    .menu-item {
+      background: #fff;
+      border-left: 6px solid var(--golden-yellow);
+      padding: 1.5rem 1.7rem 2rem;
+      border-radius: 20px;
+      box-shadow: 0 12px 28px rgba(231,84,128,0.12);
+    }
+    .menu-item img {
+      width: 100%;
+      height: 190px;
+      object-fit: cover;
+      border-radius: 16px;
+      margin-bottom: 1rem;
+      box-shadow: 0 12px 24px rgba(46,139,87,0.12);
+    }
+    .menu-item h3 {
+      color: var(--lotus-pink);
+      margin-bottom: 0.6rem;
+      font-size: 1.25rem;
+    }
+    .menu-item span { display: inline-block; margin-top: 0.5rem; color: var(--jade-green); font-weight: 600; }
+    .cta-section {
+      text-align: center;
+      background: linear-gradient(135deg, rgba(255,215,0,0.2), rgba(46,139,87,0.2));
+      border-radius: 32px;
+      padding: 3.5rem 2rem;
+      box-shadow: 0 18px 44px rgba(0,0,0,0.12);
+      margin-bottom: 4rem;
+    }
+    .cta-section h2 { font-size: 2.4rem; color: var(--jade-green); margin-bottom: 1rem; }
+    .cta-section p { margin-bottom: 2rem; font-size: 1.1rem; }
+    .map-section {
+      padding: 4rem 0 0;
+      max-width: none;
+      margin: 0;
+    }
+    .map-content {
+      max-width: 1100px;
+      margin: 0 auto 2rem;
+      padding: 0 1.5rem;
+      text-align: center;
+    }
+    .map-content h2 {
+      font-size: 2.1rem;
+      color: var(--jade-green);
+      margin-bottom: 0.8rem;
+    }
+    .map-content p {
+      font-size: 1rem;
+      color: rgba(31,43,37,0.8);
+    }
+    .map-wrapper {
+      position: relative;
+      width: 100%;
+      padding-bottom: 45%;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.18);
+    }
+    .map-wrapper iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+    .back-to-top {
+      position: fixed;
+      right: 1.6rem;
+      bottom: 1.6rem;
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      background: var(--golden-yellow);
+      color: #524100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-size: 1.8rem;
+      font-weight: 700;
+      box-shadow: 0 14px 32px rgba(0,0,0,0.22);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      z-index: 20;
+    }
+    .back-to-top:hover,
+    .back-to-top:focus-visible {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 38px rgba(0,0,0,0.26);
+    }
+    .back-to-top span { display: none; }
+    footer {
+      background: var(--jade-green);
+      color: #f8fff9;
+      text-align: center;
+      padding: 2.5rem 1rem;
+    }
+    footer p { margin-bottom: 0.5rem; }
+    footer a {
+      color: var(--golden-yellow);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    @media (max-width: 640px) {
+      .header-inner { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      header h1 { font-size: 1.9rem; }
+      header p { font-size: 0.9rem; }
+      .main-nav { width: 100%; gap: 0.9rem; }
+      .hero { padding: 4rem 1.2rem; }
+      .hero h2 { font-size: 2.1rem; white-space: normal; }
+      .hero p { font-size: 1rem; }
+      .map-section { padding-top: 3rem; }
+      .map-wrapper { padding-bottom: 65%; }
+      .back-to-top { right: 1rem; bottom: 1rem; width: 48px; height: 48px; font-size: 1.6rem; }
+    }
+  </style>
+</head>
+<body id="top">
+  <header>
+    <div class="header-inner">
+      <div class="brand">
+        <h1>Saigon Blossom</h1>
+        <p>ベトナム料理専門店 | 渋谷</p>
+      </div>
+      <nav class="main-nav" aria-label="主要メニュー">
+        <a href="#concept">コンセプト</a>
+        <a href="#features">こだわり</a>
+        <a href="#menu">おすすめ</a>
+        <a href="#reservation">予約</a>
+        <a href="#access">アクセス</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <span class="hero-kicker">香り高いベトナム料理</span>
+      <h2>ベトナム屋台の賑わいを、<span class="no-break">渋谷で。</span></h2>
+      <p>新鮮なハーブと豊かな香り。ベトナム屋台の賑やかさをそのままに、心も満たす本格料理をお届けします。</p>
+      <a class="cta-btn" href="#reservation">オンライン予約</a>
+    </div>
+  </section>
+
+  <section id="concept" class="intro">
+    <div>
+      <h2>毎日通いたくなるヘルシー＆フレッシュ</h2>
+      <p>旬の野菜とハーブをたっぷり使ったメニューで、体の内側から整う食体験をご提供。青々とした香草、さらっと軽やかな米粉料理、ユニークなスイーツ……ベトナムの“今”が、ここに凝縮されています。</p>
+    </div>
+    <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?auto=format&fit=crop&w=1600&q=80" alt="ベトナム料理の盛り合わせ">
+  </section>
+
+  <section id="features" class="highlights">
+    <h2>Saigon Blossom が選ばれる理由</h2>
+    <div class="highlight-grid">
+      <div class="highlight-card">
+        <h3>フレッシュ本場食材</h3>
+        <p>ハノイから直輸入するスパイスと、現地仕込みのレシピで、屋台そのままの味を再現しています。</p>
+      </div>
+      <div class="highlight-card">
+        <h3>フォトジェニック空間</h3>
+        <p>ロータスピンクがアクセントの店内は、まるで現地のカフェ。女子会や記念日にもぴったりです。</p>
+      </div>
+      <div class="highlight-card">
+        <h3>ヘルシー志向</h3>
+        <p>グルテンフリーの米粉麺や、カロリー控えめの蒸し料理で、食べても罪悪感ゼロ。</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="menu">
+    <h2 style="text-align:center; color: var(--lotus-pink); margin-bottom: 2rem;">おすすめメニュー</h2>
+    <div class="menu">
+      <article class="menu-item">
+        <img src="images/PhoGa.jpg" alt="フォー・ガーのボウル">
+        <h3>フォー・ガー（鶏フォー）</h3>
+        <p>ミントとバジルの香りが立ち上るさっぱりスープ。黄金の鶏油が食欲をそそります。</p>
+        <span>¥980</span>
+      </article>
+      <article class="menu-item">
+        <img src="images/bahnmi-2.jpg" alt="バインミー・サイゴンのサンドイッチ">
+        <h3>バインミー・サイゴン</h3>
+        <p>パリふわの自家製バゲットに、パテとピクルス、香草をぎっしり詰めた定番サンド。</p>
+        <span>¥780</span>
+      </article>
+      <article class="menu-item">
+        <img src="images/com-tam.jpg" alt="コムタム・プレート">
+        <h3>コムタム・プレート</h3>
+        <p>炙りポークに目玉焼き、パパイヤサラダを添えたライスプレート。黄金色のナンプラーソースが決め手。</p>
+        <span>¥1,180</span>
+      </article>
+      <article class="menu-item">
+        <img src="images/che.jpg" alt="チェー・ロータスのデザート">
+        <h3>チェー・ロータス</h3>
+        <p>蓮の実とココナッツクリームのベトナム式デザート。食後のひとときにどうぞ。</p>
+        <span>¥560</span>
+      </article>
+    </div>
+  </section>
+
+  <section id="reservation" class="cta-section">
+    <h2>今すぐご予約を</h2>
+    <p>ディナーは混み合います。オンラインなら24時間受付。イベントや貸切もお気軽に。</p>
+    <a class="cta-btn" href="tel:0312345678">03-1234-5678 に電話</a>
+  </section>
+
+  <section id="access" class="map-section" aria-label="Saigon Blossomへのアクセス">
+    <div class="map-content">
+      <h2>アクセス</h2>
+      <p>渋谷駅から徒歩5分。ロータスビル1階で皆さまをお迎えします。</p>
+    </div>
+    <div class="map-wrapper">
+      <iframe title="Saigon Blossom アクセスマップ" src="https://maps.google.com/maps?q=Saigon%20Blossom%20Shibuya&z=16&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </section>
+
+  <footer>
+    <p>Saigon Blossom | 東京都渋谷区○○ 1-2-3 Lotusビル 1F</p>
+    <p>営業時間：11:00–22:30（L.O.22:00） | 定休日：火曜日</p>
+    <p>Instagram: <a href="https://www.instagram.com/">@saigonblossom_tokyo</a></p>
+  </footer>
+  <a class="back-to-top" href="#top" aria-label="ページトップへ戻る">↑<span>ページトップへ戻る</span></a>
+</body>
+</html>
