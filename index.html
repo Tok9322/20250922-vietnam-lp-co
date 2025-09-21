@@ -38,7 +38,6 @@
       align-items: center;
       justify-content: space-between;
       gap: 1.5rem;
-      flex-wrap: wrap;
     }
     .brand {
       display: flex;
@@ -47,11 +46,28 @@
     }
     header h1 { font-size: 2.2rem; letter-spacing: 0.08em; margin: 0; color: var(--jade-green); }
     header p { font-size: 1rem; margin: 0; opacity: 0.9; color: var(--text-dark); }
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: 2px solid rgba(46,139,87,0.45);
+      border-radius: 8px;
+      padding: 0.45rem 0.85rem;
+      color: var(--jade-green);
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+    .nav-toggle:hover,
+    .nav-toggle:focus-visible {
+      background: rgba(46,139,87,0.12);
+      color: var(--lotus-pink);
+      outline: none;
+    }
     .main-nav {
       display: flex;
       gap: 1.2rem;
       align-items: center;
-      flex-wrap: wrap;
     }
     .main-nav a {
       color: var(--jade-green);
@@ -328,10 +344,31 @@
       font-weight: 600;
     }
     @media (max-width: 640px) {
-      .header-inner { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.6rem;
+      }
+      .nav-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
       header h1 { font-size: 1.9rem; }
       header p { font-size: 0.9rem; }
-      .main-nav { width: 100%; gap: 0.9rem; }
+      .main-nav {
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+        background: rgba(255,255,255,0.95);
+        border: 1px solid rgba(46,139,87,0.18);
+        border-radius: 14px;
+        padding: 1rem 1.2rem;
+        display: none;
+      }
+      .main-nav.is-open { display: flex; }
+      .main-nav a { font-size: 1rem; }
       .hero { padding: 4rem 1.2rem; }
       .hero h2 { font-size: 2.1rem; white-space: normal; }
       .hero p { font-size: 1rem; }
@@ -348,7 +385,8 @@
         <h1>Saigon Blossom</h1>
         <p>ベトナム料理専門店 | 渋谷</p>
       </div>
-      <nav class="main-nav" aria-label="主要メニュー">
+      <button class="nav-toggle" type="button" aria-controls="main-menu" aria-expanded="false">MENU</button>
+      <nav class="main-nav" id="main-menu" aria-label="主要メニュー">
         <a href="#concept">コンセプト</a>
         <a href="#features">こだわり</a>
         <a href="#menu">おすすめ</a>
@@ -472,5 +510,33 @@
     <p>Instagram: <a href="https://www.instagram.com/">@saigonblossom_tokyo</a></p>
   </footer>
   <a class="back-to-top" href="#top" aria-label="ページトップへ戻る">↑<span>ページトップへ戻る</span></a>
+  <script>
+    (function() {
+      const toggle = document.querySelector('.nav-toggle');
+      const nav = document.getElementById('main-menu');
+      if (!toggle || !nav) return;
+      const updateAria = () => {
+        const isOpen = nav.classList.contains('is-open');
+        toggle.setAttribute('aria-expanded', isOpen);
+      };
+      toggle.addEventListener('click', () => {
+        nav.classList.toggle('is-open');
+        updateAria();
+      });
+      const mq = window.matchMedia('(max-width: 640px)');
+      const onChange = e => {
+        if (!e.matches) {
+          nav.classList.remove('is-open');
+          updateAria();
+        }
+      };
+      if (typeof mq.addEventListener === 'function') {
+        mq.addEventListener('change', onChange);
+      } else if (typeof mq.addListener === 'function') {
+        mq.addListener(onChange);
+      }
+      updateAria();
+    })();
+  </script>
 </body>
 </html>
