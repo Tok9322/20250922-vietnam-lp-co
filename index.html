@@ -21,19 +21,15 @@
       line-height: 1.6;
     }
     header {
-      background: var(--jade-green);
-      color: #fff;
+      background: #ffffff;
+      color: var(--text-dark);
       padding: 1.4rem 1.5rem;
       position: relative;
       overflow: hidden;
-      border-bottom: 4px solid rgba(255,215,0,0.45);
+      border-bottom: 4px solid rgba(255,215,0,0.65);
     }
     header::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 12% 50%, rgba(231,84,128,0.18), transparent 60%);
-      pointer-events: none;
+      display: none;
     }
     .header-inner {
       max-width: 1100px;
@@ -49,8 +45,8 @@
       flex-direction: column;
       gap: 0.2rem;
     }
-    header h1 { font-size: 2.2rem; letter-spacing: 0.08em; margin: 0; }
-    header p { font-size: 1rem; margin: 0; opacity: 0.9; }
+    header h1 { font-size: 2.2rem; letter-spacing: 0.08em; margin: 0; color: var(--jade-green); }
+    header p { font-size: 1rem; margin: 0; opacity: 0.9; color: var(--text-dark); }
     .main-nav {
       display: flex;
       gap: 1.2rem;
@@ -58,7 +54,7 @@
       flex-wrap: wrap;
     }
     .main-nav a {
-      color: var(--golden-yellow);
+      color: var(--jade-green);
       font-weight: 600;
       text-decoration: none;
       letter-spacing: 0.08em;
@@ -72,7 +68,7 @@
       bottom: -0.35rem;
       width: 100%;
       height: 2px;
-      background: rgba(255,215,0,0.7);
+      background: rgba(46,139,87,0.45);
       transform: scaleX(0);
       transform-origin: center;
       transition: transform 0.2s ease;
@@ -206,6 +202,51 @@
       font-size: 1.25rem;
     }
     .menu-item span { display: inline-block; margin-top: 0.5rem; color: var(--jade-green); font-weight: 600; }
+    .gallery-section {
+      padding: 4rem 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .gallery-section h2 {
+      text-align: center;
+      font-size: 2.2rem;
+      color: var(--lotus-pink);
+      margin-bottom: 2rem;
+    }
+    .gallery-grid {
+      display: grid;
+      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+    .gallery-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 18px;
+      box-shadow: 0 18px 40px rgba(46,139,87,0.16);
+      background: #fff;
+    }
+    .gallery-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.35s ease;
+      display: block;
+    }
+    .gallery-card figcaption {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 1rem 1.2rem;
+      background: linear-gradient(0deg, rgba(46,139,87,0.78), rgba(46,139,87,0));
+      color: #fff;
+      font-size: 0.95rem;
+      letter-spacing: 0.05em;
+    }
+    .gallery-card:hover img,
+    .gallery-card:focus-within img {
+      transform: scale(1.05);
+    }
     .cta-section {
       text-align: center;
       background: linear-gradient(135deg, rgba(255,215,0,0.2), rgba(46,139,87,0.2));
@@ -311,6 +352,7 @@
         <a href="#concept">コンセプト</a>
         <a href="#features">こだわり</a>
         <a href="#menu">おすすめ</a>
+        <a href="#gallery">ギャラリー</a>
         <a href="#reservation">予約</a>
         <a href="#access">アクセス</a>
       </nav>
@@ -379,6 +421,32 @@
         <p>蓮の実とココナッツクリームのベトナム式デザート。食後のひとときにどうぞ。</p>
         <span>¥560</span>
       </article>
+    </div>
+  </section>
+
+  <section id="gallery" class="gallery-section">
+    <h2>ギャラリー</h2>
+    <div class="gallery-grid">
+      <figure class="gallery-card">
+        <img src="images/gallery/Interior.jpg" alt="Saigon Blossom の店内の落ち着いたテーブル席">
+        <figcaption>木の温もりを感じるダイニングエリア</figcaption>
+      </figure>
+      <figure class="gallery-card">
+        <img src="images/gallery/beef-noodles-6751324_1280.jpg" alt="ビーフヌードルの盛り付け">
+        <figcaption>香り立つビーフヌードル</figcaption>
+      </figure>
+      <figure class="gallery-card">
+        <img src="images/gallery/pomelo-salad-6754234_1280.jpg" alt="ポメロサラダとハーブ">
+        <figcaption>柑橘とハーブのポメロサラダ</figcaption>
+      </figure>
+      <figure class="gallery-card">
+        <img src="images/gallery/vietnamese-3671620_1280.png" alt="ベトナムのスイーツ盛り合わせ">
+        <figcaption>色とりどりのベトナムスイーツ</figcaption>
+      </figure>
+      <figure class="gallery-card">
+        <img src="images/gallery/camara-negra-N6Uo9OOGA6w-unsplash.jpg" alt="フレッシュなベトナムハーブとスパイス">
+        <figcaption>市場から届くフレッシュハーブ</figcaption>
+      </figure>
     </div>
   </section>
 
